@@ -115,7 +115,14 @@
 
 #define TTY_PARANOIA_CHECK 1
 #define CHECK_TTY_COUNT 1
-
+char *stpcpy(char *__restrict__ dest, const char *__restrict__ src);
+char *stpcpy(char *__restrict__ dest, const char *__restrict__ src)
+{
+    while ((*dest++ = *src++) != '\0')
+        /* nothing */;
+    return --dest;
+}
+EXPORT_SYMBOL(stpcpy);
 struct ktermios tty_std_termios = {	/* for the benefit of tty drivers  */
 	.c_iflag = ICRNL | IXON,
 	.c_oflag = OPOST | ONLCR,
